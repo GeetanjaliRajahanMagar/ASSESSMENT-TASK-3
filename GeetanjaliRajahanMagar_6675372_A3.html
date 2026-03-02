@@ -1,0 +1,517 @@
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title> Exercise 2 </title>
+   
+    <style>
+        :root {
+            --uow-navy: #011641;
+            --uow-red: #e31837;
+            --light-grey: #f4f4f4;
+        }
+
+        body {
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #ffffff;
+            color: #333;
+        }
+
+
+        h1 {
+            color: green;
+            margin: 36px auto 12px;
+            width: min(920px, 92%);
+        }
+
+        .h11 {
+            margin: 10px auto 18px;
+            color: red;
+
+            font-size: 50px;
+            width: min(920px, 92%);
+        }
+
+        h2 {
+            width: min(920px, 92%);
+            margin: 0 auto 18px;
+            font-weight: 600;
+            font-size: 18px;
+            color: #333;
+
+        }
+
+        .main-header {
+            background-color: var(--uow-navy);
+            color: white;
+            padding: 20px 10%; 
+            border-bottom: 5px solid var(--uow-red);
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            height: 100px;
+            width: 272px;
+            overflow: hidden;
+            margin-right: 3%;
+        }
+
+        .logo img {
+            height: 140px;
+            display: block;
+            transform: scale(1.6);
+            transform-origin: left center;
+            object-fit: contain;
+        }
+
+        .header-text {
+            flex-grow: 1;
+        }
+
+        .header-text h1 {
+            margin: 0;
+            font-size: 26px;
+            color: #ffffff;
+            width: 100%;
+        }
+
+        .header-text h2 {
+            margin: 4px 0 0;
+            font-size: 16px;
+            font-weight: normal;
+            color: #cbd5e0;
+            width: 100%;
+        }
+       .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 10%; 
+        }
+        .accordion-nav {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 30px 0 15px 0; 
+            
+        }
+
+        .tab-trigger {
+            background-color: var(--uow-navy);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            font-size: 14px;
+            font-weight: bold;
+            text-transform: uppercase;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: 0.3s;
+        }
+
+        .tab-trigger::after {
+            content: '+';
+            font-size: 20px;
+        }
+
+        .tab-trigger.active {
+            background-color: var(--uow-red);
+        }
+
+        .tab-trigger.active::after {
+            content: '—';
+        }
+
+        .task-panel {
+            display: none;
+            
+            padding: 20px 0;
+            animation: fadeIn 0.4s;
+            margin: 0 auto;
+              
+               width: 100%;
+        }
+        .task-panel table{
+            margin: 0;
+        }
+        .task-panel.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        .task2-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .task2-table th {
+            background: var(--uow-navy);
+            color: white;
+            padding: 15px;
+            text-align: left;
+        }
+
+        .task2-table tr:nth-child(odd) {
+            background-color: #ffffff;
+            color: var(--uow-navy);
+            font-family: 'Verdana', sans-serif;
+            border-bottom: 1px solid #000;
+        }
+
+        .task2-table tr:nth-child(even) {
+            background-color: #f7f7f7;
+            color: var(--uow-red);
+            font-family: 'Georgia', serif;
+            border-bottom: 1px dashed #999;
+        }
+
+        .task2-table td {
+            padding: 15px;
+            vertical-align: top;
+        }
+
+        .attack-table { width: 100%; border-collapse: collapse; border: 1px solid #ddd; }
+        .attack-table th { background: #eee; padding: 15px; text-align: left; color: #333; border: 1px solid #ddd;}
+        .attack-table td { border: 1px solid #ddd; padding: 15px; vertical-align: top; }
+        .attack-img { width: 150px; display: block; margin-top: 10px; border: 1px solid #ccc; }
+ .attack-img { 
+            width: 200px; 
+            height: 130px; 
+            object-fit: contain; 
+            display: block; 
+            margin: 10px 0; 
+            border: 1px solid #ccc;
+            background: #fff;
+        }
+        .source-text {
+            display: block;
+            font-size: 11px;
+            color: #666;
+            word-break: break-all; 
+            max-width: 200px;
+            line-height: 1.4;
+        }
+
+        .ui-box {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            align-items: center;
+            padding-bottom: 30px;
+        }
+
+                .btn-row { display: flex; gap: 15px; }
+ .animal-btn {
+            padding: 12px 30px;
+            border: 2px solid var(--uow-navy);
+            background: transparent;
+            color: var(--uow-navy);
+            font-weight: bold;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .animal-btn.active {
+            background: var(--uow-navy);
+            color: white;
+            box-shadow: 0 4px 12px rgba(0,43,73,0.3);
+        }
+
+        #task4TextField {
+            width: 80%;
+            padding: 12px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 1rem;
+            background: #f8fafc;
+        }
+
+        .display-area {
+            width: 100%;
+            text-align: center;
+            min-height: 250px;
+        }
+
+        .display-msg { font-size: 1.4rem; font-weight: bold; color: var(--uow-red); margin: 15px 0; }
+
+
+        .uow-ref {
+            position: fixed;
+            left: 0;
+            right: 0;
+            bottom: 10px;
+            text-align: center;
+            font-size: 12px;
+            color: #555;
+            background: rgba(255, 255, 255, 0.75);
+            padding: 4px 10px;
+        }
+    </style>
+
+</head>
+
+<body>
+    <header class="main-header">
+        <div class="logo">
+            <img src="https://www.uow.edu.au/assets/curated/brand-playbook/logo/logo-secondary-negative.png"
+                alt="UOW Logo">
+        </div>
+        <div class="header-text">
+            <h1>6675372 - Geetanjali Rajahan Magar</h1>
+            <h2>COMP804: Web Security | Assignment 1, due at the end of Week 5</h2>
+        </div>
+    </header>
+
+<div class="container">
+ <div class="accordion-nav">
+        <button class="tab-trigger active" onclick="toggleTask('task2', this)">Task 2: Key Dates</button>
+        <button class="tab-trigger" onclick="toggleTask('task3', this)">Task 3: Web Attacks</button>
+        <button class="tab-trigger" onclick="toggleTask('task4', this)">Task 4: Interactive JS</button>
+        <button class="tab-trigger" onclick="toggleTask('task5', this)">Task 5: Report Link</button>
+    </div>
+
+    <!-- TASK 2 PANEL -->
+
+    <div id="task2" class="task-panel active">
+        <table class="task2-table">
+            <thead>
+                <tr>
+                    <th style="width: 70%;">Activity</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>First day to enrol for re-enrolling (continuing students)</td>
+                    <td>24 Nov 2025</td>
+                </tr>
+                <tr>
+                    <td>First day to enrol for new students (commencing students)</td>
+                    <td>01 Dec 2025</td>
+                </tr>
+                <tr>
+                    <td>Orientation </td>
+                    <td>23 Feb – 26 Feb 2026 (Wollongong campus) <br><br><br>
+                    Further information is available on <a
+                            href="https://www.uow.edu.au/student/get-started/orientation/" target="_blank">Get Started</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Lectures Commence (weeks 1 - 7)</td>
+                    <td>02 Mar - 17 Apr 2026</td>
+                </tr>
+                <tr>
+                    <td>Last day to enrol / add subjects yourself</td>
+                    <td>13 Mar 2026</td>
+                </tr>
+                <tr>
+                    <td>Last day to enrol / add subjects with Head of Students approval (Exceptional circumstance only)</td>
+                    <td>20 Mar 2026</td>
+                </tr>
+                <tr>
+                    <td>
+                        <p><strong>CENSUS DATE</strong></p>
+                        <ul>
+<li>Fees due</li>
+<li>Last day to withdraw from subject/s without paying for them</li>
+<li>HECS / FEE HELP debt reporting date</li>
+<li>Last day to change HECS / FEE HELP billing option</li>
+</ul>
+<p><strong><a target="_blank" href="https://uowedu.service-now.com/askuow?id=kb_article_view&amp;sysparm_article=KB0012659" class="external_link requires_login_link" aria-label="Learn more about Census date &gt; (external link, requires login)" title="Learn more about Census date &gt; (external link, requires login)">Learn more about Census date</a></strong></p>
+                    </td>
+                    <td>31 Mar 2025</td>
+                </tr>
+                <tr>
+                    <td>Mid-Session Recess (1 week)</td>
+                    <td>20 Apr - 24 Apr 2026</td>
+                </tr>
+                <tr>
+                    <td>Lectures Recommence (weeks 8-13)</td>
+                    <td>27 Apr - 05 Jun 2026</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+     <!-- TASK 3 PANEL -->
+    <div id="task3" class="task-panel">
+        <table class="attack-table">
+            <thead><tr style="background:#eee"><th>Name</th><th>Web Attacks</th></tr></thead>
+            <tbody id="attackContent"></tbody>
+        </table>
+    </div>
+
+    <!-- TASK 4 PANEL -->
+<div id="task4" class="task-panel">
+                        <div class="table-container ui-box">
+                        <div class="btn-row">
+                            <button class="animal-btn" onclick="animalApp('Cat', this)">Cat</button>
+                            <button class="animal-btn" onclick="animalApp('Dog', this)">Dog</button>
+                            <button class="animal-btn" onclick="animalApp('Frog', this)">Frog</button>
+                        </div>
+                        
+                        <input type="text" id="task4TextField" readonly placeholder="Waiting for selection...">
+                        
+                        <div class="display-area">
+                            <div id="msgDisplay" class="display-msg"></div>
+                            <div id="imgDisplay"></div>
+                        </div>
+                    </div>
+                </div>
+</div>
+  
+
+
+
+
+
+    <div class="uow-ref">
+        Reference: University of Wollongong logo (primary). Source:
+        https://www.uow.edu.au/assets/curated/brand-playbook/logo/logo-primary.png
+        (accessed 23 Feb 2026). Used for academic assessment only.
+    </div>
+
+     <script>
+        //Accordion Logic
+        function toggleTask(id, btn) {
+            document.querySelectorAll('.task-panel').forEach(p => p.classList.remove('active'));
+            document.querySelectorAll('.tab-trigger').forEach(b => b.classList.remove('active'));
+
+            document.getElementById(id).classList.add('active');
+            btn.classList.add('active');
+        }
+        //Task 3 Row data generation
+const threats = [
+  {
+    name: "SQL Injection",
+    description: "Injection of malicious SQL queries to manipulate or access unauthorized database data.",
+    link: "https://owasp.org/www-community/attacks/SQL_Injection",
+    image: "/images/sql-injection.png",
+    source:"https://www.flaticon.com"
+  },
+  {
+    name: "XSS",
+    description: "Cross-Site Scripting attack that injects malicious scripts into trusted websites.",
+    link: "https://owasp.org/www-community/attacks/xss/",
+    image: "/images/xss.png",
+     source:"https://www.flaticon.com"
+  },
+  {
+    name: "CSRF",
+    description: "Cross-Site Request Forgery that tricks users into executing unwanted actions on authenticated sessions.",
+    link: "https://owasp.org/www-community/attacks/csrf",
+    image: "/images/csrf.png",
+     source:"https://securitysouls.com/a-tale-of-cross-site-request-forgery-csrf"
+  },
+  {
+    name: "DDoS",
+    description: "Distributed Denial of Service attack overwhelming systems with massive traffic.",
+    link: "https://owasp.org/www-community/attacks/Denial_of_Service",
+    image: "/images/ddos.png",
+   source:"https://www.flaticon.com"
+  },
+  {
+    name: "Phishing",
+    description: "Social engineering attack that deceives users into revealing sensitive information.",
+    link: "https://www.coursera.org/articles/types-of-phishing?utm_medium=sem&utm_source=gg&utm_campaign=b2c_apac_x_multi_ftcof_career-academy_cx_dr_bau_gg_pmax_gc_au_all_m_hyb_25-04_desktop&campaignid=22452866626&adgroupid=&device=c&keyword=&matchtype=&network=x&devicemodel=&creativeid=&assetgroupid=6568570071&targetid=&extensionid=&placement=&gad_source=1&gad_campaignid=22452887209&gbraid=0AAAAADdKX6YJN88x4ZybmZpGTofUK27dp&gclid=Cj0KCQiA5I_NBhDVARIsAOrqIsaHmXxgEw2BNiy34aFK3FrIkqiN78ztT3lZgF6pAOXdY2apSKOxRgkaAkXfEALw_wcB",
+    image: "/images/phishing.png",
+    source:"https://www.flaticon.com"
+  },
+  {
+    name: "Broken Authentication",
+    description: "Improper implementation of authentication and session management mechanisms.",
+    link: "https://auth0.com/blog/what-is-broken-authentication/",
+    image: "/images/broken-authentication.png",
+        source:"https://www.flaticon.com"
+
+  },
+  {
+    name: "Broken Access Control",
+    description: "Failure to enforce restrictions on authenticated users' access to resources.",
+    link: "https://owasp.org/www-community/Broken_Access_Control",
+    image: "/images/broken-access-control.png",
+        source:"https://www.flaticon.com"
+
+  },
+  {
+    name: "Security Misconfiguration",
+    description: "Improperly configured security settings exposing systems to risk.",
+    link: "https://owasp.org/Top10/2025/A02_2025-Security_Misconfiguration",
+    image: "/images/security-misconfiguration.png",
+    source:"https://www.kiuwan.com"
+  },
+  {
+    name: "XXE",
+    description: "XML External Entity attack exploiting vulnerable XML parsers.",
+    link: "https://owasp.org/www-community/vulnerabilities/XML_External_Entity_(XXE)_Processing",
+    image: "/images/xxe.png",
+        source:"https://www.cobalt.io"
+
+  },
+  {
+    name: "Insecure Deserialization",
+    description: "Exploiting unsafe deserialization to execute arbitrary code or manipulate objects.",
+    link: "https://owasp.org/www-community/vulnerabilities/Insecure_Deserialization",
+    image: "/images/insecure-deserialization.png",
+            source:"https://www.cobalt.io"
+
+  }
+];
+        const tbody = document.getElementById('attackContent');
+        threats.forEach(n => {
+            tbody.innerHTML += `<tr>
+                <td style="width:250px;">
+                    <strong>${n.name}</strong><br>
+                    <img src="${n.image}" class="attack-img">
+                    <span class="source-text"><strong>Source:</strong> ${n.source}</span>
+                </td>
+                <td>
+                    <p style="margin-top:0;">${n.description}</p>
+                    <br>
+                    <a href="${n.link}" target="_blank">Technical Documentation</a>
+                </td>
+            </tr>`;
+        });
+
+
+
+         function animalApp(animal, btn) {
+            document.querySelectorAll('.animal-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+
+            document.getElementById('task4TextField').value = "User clicks " + animal;
+
+            document.getElementById('msgDisplay').innerText = animal + " is clicked";
+
+            const imgDiv = document.getElementById('imgDisplay');
+            let url = "";
+            if(animal === 'Cat') url = "/images/cat.png";
+            if(animal === 'Dog') url = "/images/dog.png";
+            if(animal === 'Frog') url = "/images/frog.png";
+
+            imgDiv.innerHTML = `<img src="${url}" class="animal-img" style="width:400px; margin:auto">
+            <span class="source-text"><strong>Source:</strong> https://www.flaticon.com</span>`;
+        }
+    </script>
+
+</body>
+
+</html>
